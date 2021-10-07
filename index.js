@@ -10,12 +10,12 @@ const apiKey = `${process.env.SENDGRID_API_KEY}`;
 sgMail.setApiKey(apiKey);
 console.log(apiKey);
 
-mongoose.connect('mongodb://localhost:27017/reception-db')
-.then(()=>{
+mongoose.connect(`${process.env.MongoDB_URI}`,{ useNewUrlParser: true, useUnifiedTopology: true})
+.then((res)=>{
     console.log("DB CONNECTED")
 })
 .catch((er)=>{
-    console.log(err)
+    console.log(err.message)
 })
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'/views'));
